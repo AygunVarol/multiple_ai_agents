@@ -233,6 +233,30 @@ class BaseAgent(ABC):
             return 4.0  # Poor
         else:
             return 5.0  # Very Poor
+
+    def _format_sensor_context(self, sensor_data: Dict) -> str:
+        """Format sensor data for LLM context."""
+        if sensor_data.get("status") == "no_recent_data":
+            return "No recent sensor data available."
+
+        latest = sensor_data.get("latest_reading", {})
+        averages = sensor_data.get("averages", {})
+
+        context = (
+            f"Recent Sensor Data (last {sensor_data.get('time_range_minutes', 10)} minutes):\n"
+            f"- Current Temperature: {latest.get('temperature', 'N/A')}°C\n"
+            f"- Current Humidity: {latest.get('humidity', 'N/A')}%\n"
+            f"- Current Pressure: {latest.get('pressure', 'N/A')} hPa\n"
+            f"- Current Air Quality Index: {latest.get('air_quality_index', 'N/A')}\n\n"
+            "Average Conditions:\n"
+            f"- Avg Temperature: {averages.get('temperature', 'N/A')}°C\n"
+            f"- Avg Humidity: {averages.get('humidity', 'N/A')}%\n"
+            f"- Avg Pressure: {averages.get('pressure', 'N/A')} hPa\n"
+            f"- Avg Air Quality: {averages.get('air_quality_index', 'N/A')}\n\n"
+            f"Data points: {sensor_data.get('sample_count', 0)} readings"
+        )
+
+        return context
     
     async def register_with_supervisor(self):
         """Register this agent with the supervisor"""
