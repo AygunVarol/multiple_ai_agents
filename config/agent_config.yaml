@@ -1,0 +1,20 @@
+supervisor:
+  host: "localhost"
+  port: 8080
+  model: "mock"
+  resource_threshold: 0.7
+
+agents:
+  office:
+    location: "office"
+    sensor_port: "mock"
+    model: "mock"
+  kitchen:
+    location: "kitchen"
+    sensor_port: "mock"
+    model: "mock"
+  hallway:
+    location: "hallway"
+    sensor_port: "mock"
+    model: "mock"
+

@@ -1,0 +1,6 @@
+aiohttp
+fastapi
+uvicorn
+httpx
+psutil
+
