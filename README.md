@@ -233,7 +233,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 - Aygün Varol - [aygun.varol@tuni.fi](mailto:aygun.varol@tuni.fi)
-- Project Link: [https://github.com/yourusername/multi-agent-llm-smart-env](https://github.com/yourusername/multi-agent-llm-smart-env)
+- Project Link: [[https://github.com/yourusername/multi-agent-llm-smart-env](https://github.com/AygunVarol/multiple_ai_agents)]([https://github.com/AygunVarol/multi-agent-llm-smart-env](https://github.com/AygunVarol/multiple_ai_agents))
 
 ## Troubleshooting
 
