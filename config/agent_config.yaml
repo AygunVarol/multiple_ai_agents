@@ -1,20 +1,86 @@
+# Multi-Agent System Configuration
+system:
+  name: "smart_environment_multi_agent"
+  version: "1.0.0"
+  log_level: "INFO"
+  data_directory: "./data"
+
 supervisor:
-  host: "localhost"
+  host: "0.0.0.0"
   port: 8080
-  model: "mock"
-  resource_threshold: 0.7
+  model:
+    name: "llama-3.2-1b"
+    max_tokens: 2048
+    temperature: 0.7
+  resource_monitoring:
+    cpu_threshold: 0.8
+    memory_threshold: 0.85
+    check_interval: 30
+  task_allocation:
+    strategy: "load_balanced"
+    retry_attempts: 3
+    timeout: 60
 
 agents:
   office:
+    id: "office_001"
     location: "office"
-    sensor_port: "mock"
-    model: "mock"
+    type: "location_agent"
+    host: "192.168.1.101"
+    port: 8081
+    sensor:
+      type: "bme680"
+      port: "/dev/ttyUSB0"
+      calibration_file: "./config/sensor_calibration.json"
+    model:
+      name: "llama-3.2-1b"
+      specialization: "office_environment"
+    
   kitchen:
+    id: "kitchen_001"
     location: "kitchen"
-    sensor_port: "mock"
-    model: "mock"
+    type: "location_agent"
+    host: "192.168.1.102"
+    port: 8082
+    sensor:
+      type: "bme680"
+      port: "/dev/ttyUSB1"
+      calibration_file: "./config/sensor_calibration.json"
+    model:
+      name: "llama-3.2-1b"
+      specialization: "kitchen_environment"
+    
   hallway:
+    id: "hallway_001"
     location: "hallway"
-    sensor_port: "mock"
-    model: "mock"
+    type: "location_agent"
+    host: "192.168.1.103"
+    port: 8083
+    sensor:
+      type: "bme680"
+      port: "/dev/ttyUSB2"
+      calibration_file: "./config/sensor_calibration.json"
+    model:
+      name: "llama-3.2-1b"
+      specialization: "hallway_environment"
 
+communication:
+  protocol: "REST"
+  timeout: 30
+  retry_policy:
+    max_retries: 3
+    backoff_factor: 1.5
+  health_check_interval: 60
+
+monitoring:
+  metrics_enabled: true
+  metrics_port: 9090
+  log_rotation:
+    max_size: "100MB"
+    backup_count: 5
+  performance_tracking:
+    - latency
+    - throughput
+    - resource_utilization
+    - accuracy
+    - energy_consumption
