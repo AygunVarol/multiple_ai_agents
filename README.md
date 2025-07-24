@@ -246,3 +246,24 @@ See [docs/troubleshooting.md](docs/troubleshooting.md) for common issues and sol
 - [ ] Enhanced security features
 - [ ] Kubernetes deployment automation
 - [ ] Real-time dashboard
+
+## Quick Start Installation
+
+### Prerequisites
+- Python 3.8+ 
+- Raspberry Pi 4/5 with Raspbian OS (for edge deployment)
+- BME680 sensors
+- Git
+
+### Automated Installation
+```bash
+# Clone repository
+git clone https://github.com/AygunVarol/multiple_ai_agents.git
+cd multiple_ai_agents
+
+# Run setup script
+chmod +x scripts/setup.sh
+./scripts/setup.sh
+
+# Or install manually
+pip install -e .
